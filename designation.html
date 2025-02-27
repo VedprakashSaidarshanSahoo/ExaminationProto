@@ -10,9 +10,13 @@
             const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
             if (checkboxes.length === 0) {
                 alert("Please select at least one subject to continue.");
-                event.preventDefault(); // Prevent form submission
+                event.preventDefault();
+            } else {
+                let subjects = Array.from(checkboxes).map(cb => cb.value);
+                sessionStorage.setItem("subjects", JSON.stringify(subjects));
             }
         }
+
     </script>
 </head>
 <body>
