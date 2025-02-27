@@ -12,7 +12,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding: 20px;
 }
 
 /* Centered Container */
@@ -23,12 +25,18 @@ body {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
-    width: 40%;
+    width: 100%;
+    max-width: 500px;
     animation: fadeIn 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
 }
 
 /* Input Fields & Buttons */
-input, select {
+input:not([type="radio"]):not([type="checkbox"]), select {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -47,11 +55,12 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 button:hover {
     background: #e68900;
+    transform: scale(1.05);
 }
 
 /* Question Styling */
@@ -61,7 +70,135 @@ button:hover {
     margin: 10px 0;
     border-radius: 5px;
     text-align: left;
+    transition: background 0.3s ease-in-out;
 }
+
+.question:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Radio Button Styling */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    justify-content: space-between;
+}
+
+.radio-group label:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.radio-group input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: relative;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.radio-group input[type="radio"]:checked {
+    background: #ff9800;
+    border-color: #ff9800;
+}
+
+/* Checkbox Styling */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.checkbox-group label:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+input[type="checkbox"]:checked {
+    background: #ff9800;
+    border-color: #ff9800;
+}
+
+.exam-notice {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    max-width: 600px;
+    margin: auto;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.exam-notice h2 {
+    text-align: center;
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.exam-notice ul {
+    padding-left: 20px;
+}
+
+.exam-notice ul li {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.exam-notice .highlight {
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.exam-notice .warning {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    margin-top: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Webcam Styling */
 #videoFeed {
@@ -75,4 +212,31 @@ button:hover {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    body {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
