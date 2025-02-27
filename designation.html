@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Subjects</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script>
+        function validateForm(event) {
+            const checkboxes = document.querySelectorAll('input[name="subjects"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one subject to continue.");
+                event.preventDefault(); // Prevent form submission
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Your Subjects</h1>
+        <form action="info.html" onsubmit="validateForm(event)">
+            <label><input type="checkbox" name="subjects" value="Android"> Android</label><br>
+            <label><input type="checkbox" name="subjects" value="Java"> Java</label><br>
+            <label><input type="checkbox" name="subjects" value="Python"> Python</label><br>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+</body>
+</html>

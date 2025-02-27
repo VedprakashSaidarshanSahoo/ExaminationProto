@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Login</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Online Exam</h1>
+        <form id="registrationForm">
+            <input type="text" id="name" placeholder="Enter Name" required>
+            <input type="text" id="rollNumber" placeholder="Enter Roll Number" required>
+            <input type="email" id="email" placeholder="Enter Email ID" required>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("registrationForm").addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent default form submission
+                registerStudent();
+            });
+        });
+
+        // ✅ Register Student in MySQL Database
+        function registerStudent() {
+            const name = document.getElementById("name").value.trim();
+            const rollNumber = document.getElementById("rollNumber").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (!name || !rollNumber || !email) {
+                alert("All fields are required!");
+                return;
+            }
+
+            fetch("https://wm5w707f-8000.inc1.devtunnels.ms/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, roll_number: rollNumber, email }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // localStorage.setItem("roll_number", rollNumber); // ✅ Store roll number locally
+
+                    sessionStorage.setItem("roll_number", rollNumber);
+
+                    window.location.href = "designation.html"; // Redirect to the next page
+                } else {
+                    alert("Registration failed: " + data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error during registration:", error);
+                alert("An error occurred. Please try again.");
+            });
+        }
+
+
+    </script>
+</body>
+</html>
