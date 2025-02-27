@@ -78,15 +78,26 @@ function enforceFullscreen() {
 // ✅ Detect Tab Switching (Cheating Prevention)
 function detectTabSwitch() {
     let warningDisplayed = false;
+    let alertActive = false; // Prevent disqualification during alerts
+
+    // Override alert() to track when it's active
+    const originalAlert = window.alert;
+    window.alert = function (message) {
+        alertActive = true; // Mark alert as active
+        originalAlert(message);
+        setTimeout(() => {
+            alertActive = false; // Reset after alert closes
+        }, 500); // Give some buffer time
+    };
 
     document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
+        if (document.hidden && !alertActive) {
             disqualifyStudent();
         }
     });
 
     window.addEventListener("blur", function () {
-        if (!warningDisplayed) {
+        if (!warningDisplayed && !alertActive) {
             warningDisplayed = true;
             document.getElementById("warning").style.display = "block";
             setTimeout(disqualifyStudent, 2000);
