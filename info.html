@@ -5,7 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Instructions</title>
     <link rel="stylesheet" href="static/styles.css">
-    <script defer src="static/script.js"></script>
+    <!-- <script defer src="static/script.js"></script> -->
+     <script>
+        api_end_url = "https://wm5w707f-8000.inc1.devtunnels.ms";
+
+        // ✅ Fetch Exam Instructions from Backend
+        function fetchExamInstructions() {
+            fetch(api_end_url + "/get_instructions")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("exam-notice").innerText = data.instructions;
+                })
+                .catch(error => console.error("Error fetching instructions:", error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchExamInstructions();
+        });
+     </script>
 </head>
 <body>
     <div class="container">
@@ -43,11 +60,6 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // fetchTimeLimit();
-            fetchExamInstructions();
-        });
-
         function startExam() {
             window.location.href = "exam.html";
         }
