@@ -5,16 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Instructions</title>
     <link rel="stylesheet" href="static/styles.css">
-    <script src="static/script.js"></script>
+    <script defer src="static/script.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Exam Information</h1>
         <p id="exam-instructions">Please read the following instructions before starting the exam.</p>
+        <div class="exam-notice">
+            <h2>📢 Important Exam Notice</h2>
+            <p><strong>Please read the following instructions carefully before starting the exam:</strong></p>
+            <ul>
+                <li><strong>Time Limit:</strong> <span id="exam-notice" class="highlight">Loading...</span></li>
+                <li><strong>Navigation:</strong>
+                    <ul>
+                        <li>You <strong>cannot refresh or go back</strong> once the exam starts.</li>
+                        <li>Changing tabs <strong>may lead to disqualification</strong>.</li>
+                    </ul>
+                </li>
+                <li><strong>Answer Submission:</strong>
+                    <ul>
+                        <li>Select the correct answer for each question.</li>
+                        <li>Ensure all questions are answered before submitting.</li>
+                    </ul>
+                </li>
+                <li><strong>Cheating Prevention:</strong>
+                    <ul>
+                        <li>The exam system detects <strong>tab switching, multiple logins, and external device usage</strong>.</li>
+                        <li>Your <strong>webcam may be recorded</strong> for monitoring.</li>
+                    </ul>
+                </li>
+                <li><strong>Technical Issues:</strong> If you face any issues, contact the exam administrator immediately.</li>
+            </ul>
+            <p class="warning">🔴 <strong>Click "Start Exam" only when you are ready.</strong></p>
+        </div>
+        
         <button onclick="startExam()">Start Exam</button>
     </div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // fetchTimeLimit();
+            fetchExamInstructions();
+        });
+
         function startExam() {
             window.location.href = "exam.html";
         }
