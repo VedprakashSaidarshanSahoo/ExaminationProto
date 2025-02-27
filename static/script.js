@@ -115,7 +115,7 @@ function fetchExamInstructions() {
     fetch(api_end_url + "/get_instructions")
         .then(response => response.json())
         .then(data => {
-            document.getElementById("instructions").innerText = data.instructions;
+            document.getElementById("exam-notice").innerText = data.instructions;
         })
         .catch(error => console.error("Error fetching instructions:", error));
 }
@@ -135,7 +135,7 @@ function fetchQuestions() {
                     <p><strong>Q${index + 1}:</strong> ${q.question}</p>
                     ${q.options.map(option => `
                         <label>
-                            <input type="radio" name="q${index}" value="${option}"> ${option}
+                            <input id="OPT" type="radio" name="q${index}" value="${option}"> ${option}
                         </label><br>
                     `).join("")}
                 `;
